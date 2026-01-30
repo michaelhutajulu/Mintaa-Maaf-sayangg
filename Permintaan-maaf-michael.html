@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permintaan maaf michael 💝</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700;900&family=Raleway:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff6b9d;
+            --secondary: #ffa07a;
+            --accent: #c44569;
+            --gold: #ffd700;
+            --purple: #b24592;
+            --dark: #1a1a2e;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            color: #2d1b1b;
+            overflow-x: hidden;
+            background: #000;
+            cursor: none;
+        }
+
+        /* ==================== CUSTOM CURSOR ==================== */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            transition: all 0.1s ease;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--secondary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99998;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+            opacity: 0.5;
+        }
+
+        .cursor.expand {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 107, 157, 0.2);
+        }
+
+        /* ==================== CANVAS BACKGROUND ==================== */
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* ==================== MUSIC PLAYER ==================== */
+        .music-player {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(255, 107, 157, 0.5);
+            z-index: 9999;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .music-player:hover {
+            transform: scale(1.15);
+            box-shadow: 0 15px 50px rgba(255, 107, 157, 0.7);
+        }
+
+        .music-icon {
+            font-size: 2.5rem;
+            animation: rotate 4s linear infinite;
+        }
+
+        .music-icon.paused {
+            animation-play-state: paused;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .volume-control {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 9998;
+        }
+
+        .volume-control.show {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .volume-slider {
+            width: 100px;
+            height: 5px;
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 107, 157, 0.2);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 35px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+            padding: 8px 20px;
+            border-radius: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::before {
+            width: 80%;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* ==================== SECTION BASE ==================== */
+        section {
+            min-height: 100vh;
+            padding: 120px 20px 80px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--gold), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* ==================== LOADER ==================== */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 999999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-heart {
+            font-size: 10rem;
+            animation: heartbeat 1s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.2); }
+        }
+
+        .loader-text {
+            color: white;
+            font-size: 2rem;
+            margin-top: 30px;
+            font-family: 'Great Vibes', cursive;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        #hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            perspective: 1000px;
+            overflow: hidden;
+        }
+
+        .hero-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.1s;
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+
+        .hero-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 8rem;
+            color: white;
+            text-shadow: 
+                0 0 20px rgba(255, 107, 157, 0.8),
+                0 0 40px rgba(255, 107, 157, 0.6),
+                0 0 60px rgba(255, 107, 157, 0.4);
+            animation: glow-pulse 2s ease-in-out infinite;
+            margin-bottom: 30px;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% {
+                text-shadow: 
+                    0 0 20px rgba(255, 107, 157, 0.8),
+                    0 0 40px rgba(255, 107, 157, 0.6),
+                    0 0 60px rgba(255, 107, 157, 0.4);
+            }
+            50% {
+                text-shadow: 
+                    0 0 30px rgba(255, 107, 157, 1),
+                    0 0 60px rgba(255, 107, 157, 0.8),
+                    0 0 90px rgba(255, 107, 157, 0.6);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 2.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 60px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .interactive-heart-3d {
+            width: 200px;
+            height: 200px;
+            margin: 50px auto;
+            position: relative;
+            cursor: pointer;
+            animation: float-heart 3s ease-in-out infinite;
+        }
+
+        @keyframes float-heart {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .heart-3d {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate-3d 10s linear infinite;
+        }
+
+        .heart-3d.clicked {
+            animation: explode 0.5s ease-out;
+        }
+
+        @keyframes rotate-3d {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        @keyframes explode {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+            100% { transform: scale(1); }
+        }
+
+        .heart-3d::before,
+        .heart-3d::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 160px;
+            border-radius: 100px 100px 0 0;
+            background: linear-gradient(135deg, var(--primary), var(--gold));
+        }
+
+        .heart-3d::before {
+            left: 100px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart-3d::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        .heart-click-text {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ==================== LETTER SECTION ==================== */
+        #letter {
+            background: radial-gradient(circle at top, #ffeef8, #ffe5f3);
+        }
+
+        .letter-paper {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 80px;
+            border-radius: 30px;
+            box-shadow: 
+                0 40px 80px rgba(0, 0, 0, 0.2),
+                inset 0 0 100px rgba(255, 107, 157, 0.05);
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.3s;
+        }
+
+        .letter-paper:hover {
+            transform: rotateX(2deg) rotateY(2deg);
+        }
+
+        .letter-paper::before {
+            content: '💌';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 5rem;
+            background: white;
+            padding: 0 30px;
+            border-radius: 50%;
+        }
+
+        .letter-heading {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .letter-paragraph {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            line-height: 2.3;
+            color: #333;
+            margin-bottom: 35px;
+            text-align: justify;
+            opacity: 0;
+            animation: fadeInText 0.8s ease-out forwards;
+        }
+
+        .letter-paragraph:nth-child(2) { animation-delay: 0.2s; }
+        .letter-paragraph:nth-child(3) { animation-delay: 0.4s; }
+        .letter-paragraph:nth-child(4) { animation-delay: 0.6s; }
+        .letter-paragraph:nth-child(5) { animation-delay: 0.8s; }
+        .letter-paragraph:nth-child(6) { animation-delay: 1s; }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .letter-highlight {
+            background: linear-gradient(120deg, rgba(255, 107, 157, 0.3), rgba(255, 215, 0, 0.3));
+            padding: 3px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .letter-signature {
+            text-align: right;
+            font-style: italic;
+            margin-top: 60px;
+            font-size: 1.4rem;
+            color: var(--accent);
+        }
+
+        /* ==================== PHOTO GALLERY WITH REAL IMAGES ==================== */
+        #gallery {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        #gallery .section-title {
+            color: white;
+            -webkit-text-fill-color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            padding: 50px 0;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            cursor: pointer;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(255, 107, 157, 0.5);
+        }
+
+        .photo-frame {
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #ffd4e5, #ffc4d6);
+        }
+
+        /* ========================================
+           📸 BAGIAN FOTO - GANTI DI SINI! 
+           ======================================== */
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .photo-card:hover .photo-frame img {
+            transform: scale(1.1);
+        }
+
+        /* Jika tidak ada foto, tampilkan emoji */
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+        }
+        /* ======================================== */
+
+        .photo-caption {
+            padding: 30px;
+        }
+
+        .photo-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .photo-description {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        /* ==================== TIMELINE ==================== */
+        #timeline {
+            background: linear-gradient(to bottom, #2c3e50, #34495e);
+        }
+
+        #timeline .section-title {
+            color: white;
+            -webkit-text-fill-color: white;
+        }
+
+        .timeline-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 0;
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform-style: preserve-3d;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 107, 157, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+
+        .timeline-item:hover::before {
+            left: 100%;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-10px) rotateX(3deg);
+            box-shadow: 0 30px 80px rgba(255, 107, 157, 0.5);
+        }
+
+        .timeline-icon {
+            font-size: 5rem;
+            text-align: center;
+            margin-bottom: 25px;
+            animation: rotate-slow 6s linear infinite;
+        }
+
+        @keyframes rotate-slow {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        .timeline-date {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .timeline-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .timeline-text {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: #666;
+            text-align: center;
+        }
+
+        /* ==================== LOVE GAME ==================== */
+        #love-game {
+            background: radial-gradient(circle at center, #ff9a9e, #fad0c4);
+        }
+
+        .game-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px;
+            border-radius: 40px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .game-title {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .love-heart-display {
+            font-size: 10rem;
+            margin: 30px 0;
+            animation: pulse-heart 1.5s infinite;
+        }
+
+        @keyframes pulse-heart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .love-meter-container {
+            width: 100%;
+            height: 50px;
+            background: #e0e0e0;
+            border-radius: 25px;
+            overflow: hidden;
+            margin: 40px 0;
+            position: relative;
+            box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .love-meter-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--gold), var(--purple));
+            width: 0%;
+            transition: width 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 20px;
+            font-weight: 700;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .calculate-button {
+            padding: 25px 70px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .calculate-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.6);
+        }
+
+        .calculate-button:active {
+            transform: translateY(-2px);
+        }
+
+        .love-result {
+            margin-top: 40px;
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: 600;
+            min-height: 80px;
+            line-height: 1.8;
+        }
+
+        /* ==================== PROMISES ==================== */
+        #promises {
+            background: linear-gradient(135deg, #ffeef8, #fff0f5);
+        }
+
+        .promises-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 45px;
+            padding: 50px 0;
+        }
+
+        .promise-card {
+            background: white;
+            padding: 45px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(255, 160, 122, 0.1));
+            transform: translateY(100%);
+            transition: transform 0.5s;
+        }
+
+        .promise-card:hover::before {
+            transform: translateY(0);
+        }
+
+        .promise-card:hover {
+            transform: translateY(-20px) scale(1.05);
+            box-shadow: 0 30px 70px rgba(255, 107, 157, 0.3);
+        }
+
+        .promise-icon {
+            font-size: 5rem;
+            margin-bottom: 25px;
+            display: inline-block;
+            animation: bounce-icon 2s infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes bounce-icon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .promise-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .promise-text {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #666;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==================== REASONS CAROUSEL ==================== */
+        #reasons {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+        }
+
+        #reasons .section-title {
+            color: white;
+            -webkit-text-fill-color: white;
+        }
+
+        .carousel-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            position: relative;
+            height: 500px;
+        }
+
+        .reason-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 70px;
+            border-radius: 35px;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: scale(0.8) translateX(-100px);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: none;
+        }
+
+        .reason-slide.active {
+            opacity: 1;
+            transform: scale(1) translateX(0);
+            display: block;
+            z-index: 1;
+        }
+
+        .reason-number {
+            font-size: 6rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--gold), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+        }
+
+        .reason-title {
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 25px;
+        }
+
+        .reason-description {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #666;
+        }
+
+        .carousel-controls {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .carousel-btn {
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 15px;
+            cursor: pointer;
+            font-size: 2rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+        }
+
+        .carousel-btn:hover {
+            transform: scale(1.2);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.6);
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        .dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: white;
+            transform: scale(1.5);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        /* ==================== FINAL MESSAGE ==================== */
+        #final {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            text-align: center;
+        }
+
+        #final .section-title {
+            color: white;
+            -webkit-text-fill-color: white;
+            font-size: 6rem;
+        }
+
+        .final-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .final-paragraph {
+            font-size: 1.8rem;
+            line-height: 2.3;
+            color: white;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .final-paragraph strong {
+            font-weight: 800;
+            font-size: 2rem;
+            color: var(--gold);
+        }
+
+        .forgive-button-ultimate {
+            padding: 35px 90px;
+            font-size: 2.3rem;
+            font-family: 'Great Vibes', cursive;
+            background: white;
+            color: var(--primary);
+            border: none;
+            border-radius: 70px;
+            cursor: pointer;
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.5),
+                inset 0 -8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            margin-top: 50px;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .forgive-button-ultimate::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 107, 157, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .forgive-button-ultimate:hover::before {
+            width: 600px;
+            height: 600px;
+        }
+
+        .forgive-button-ultimate:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                0 30px 70px rgba(0, 0, 0, 0.6),
+                inset 0 -8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .forgive-button-ultimate:active {
+            transform: translateY(-5px);
+        }
+
+        /* ==================== MODAL ==================== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 100000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(15px);
+        }
+
+        .modal-content {
+            background: white;
+            padding: 90px;
+            border-radius: 50px;
+            text-align: center;
+            max-width: 800px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
+            animation: modalPop 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes modalPop {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1) rotate(10deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .modal h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--gold), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 35px;
+        }
+
+        .modal p {
+            font-size: 1.7rem;
+            line-height: 2.2;
+            margin-bottom: 30px;
+            color: #666;
+        }
+
+        .celebration-emoji {
+            font-size: 8rem;
+            animation: spinScale 1s ease-in-out;
+            margin-bottom: 30px;
+        }
+
+        @keyframes spinScale {
+            0% { transform: rotate(0deg) scale(0); }
+            50% { transform: rotate(360deg) scale(1.3); }
+            100% { transform: rotate(720deg) scale(1); }
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            .cursor,
+            .cursor-follower {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 4rem;
+            }
+
+            .section-title {
+                font-size: 3.5rem;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+
+            .letter-paper {
+                padding: 40px 25px;
+            }
+
+            .letter-paragraph {
+                font-size: 1.1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .carousel-container {
+                height: 600px;
+            }
+
+            .reason-slide {
+                padding: 40px;
+            }
+
+            .modal-content {
+                padding: 50px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ==================== LOADER ==================== -->
+    <div class="loader" id="loader">
+        <div class="loader-heart">💖</div>
+        <div class="loader-text">Sabar ya sayangkuuu...</div>
+    </div>
+
+    <!-- ==================== CUSTOM CURSOR ==================== -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <!-- ==================== CANVAS BACKGROUND ==================== -->
+    <canvas id="canvas-bg"></canvas>
+
+    <!-- ==================== MUSIC PLAYER ==================== -->
+    <!-- 🎵 MUSIC PLAYER - Klik untuk play/pause -->
+    <div class="music-player" id="musicPlayer" title="Play/Pause Music">
+        <div class="music-icon" id="musicIcon">🎵</div>
+    </div>
+
+    <!-- Volume Control (Optional) -->
+    <div class="volume-control" id="volumeControl">
+        <label style="font-size: 0.9rem; color: #666;">Volume:</label><br>
+        <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
+    </div>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#letter">Surat</a></li>
+            <li><a href="#gallery">Foto Kita</a></li>
+            <li><a href="#timeline">Timeline</a></li>
+            <li><a href="#love-game">Love Test</a></li>
+            <li><a href="#promises">Janji</a></li>
+            <li><a href="#reasons">Alasan</a></li>
+            <li><a href="#final">Pesan</a></li>
+        </ul>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="hero">
+        <div class="hero-3d">
+            <div class="hero-content">
+                <h1 class="hero-title">Maafkan Aku ya Sayang</h1>
+                <p class="hero-subtitle">Untuk hasianku yang paling berharga dalam hidupku</p>
+                
+                <div class="interactive-heart-3d" onclick="clickHeart()">
+                    <div class="heart-3d"></div>
+                    <div class="heart-click-text">Klik Ini sayang ❤️</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== LETTER SECTION ==================== -->
+    <section id="letter">
+        <div class="container">
+            <h2 class="section-title">Surat Dari Hatiku</h2>
+            
+            <div class="letter-paper">
+                <h3 class="letter-heading">Untuk Cinta Sejatiku,</h3>
+                
+                <p class="letter-paragraph">
+                    Sayangg....
+                </p>
+
+                <p class="letter-paragraph">
+                    Di baca baik - baik ya, aku membuat nya ini khusus buat kamu. Aku disini mau meminta maaf atas kesalahan yang sudah aku buat, 
+                    aku benar - benar menyesal dan aku tidak mau mengulangnya lagi, 
+                    karna aku tau begitu <span class="letter-highlight">susah nya memaafkan kesalahan itu:((.</span>
+                </p>
+
+                <p class="letter-paragraph">
+                    Aku tau aku telah membuat kesalahan yang sangat menyakitimu. Aku melihat air mata di matamu, aku benar -  benar sakit banget liat kamu begitu:((
+                       <span class="letter-highlight"> Makanya aku pengen nebus semua kesalahan yang sudah aku lakuin sama kamu, aku gamau liat kamu sedih2 lagi:((
+                            Aku sudah bertekad lebih kuat lagi dari sebelumnnya akan membahagiakan kamu dan kurangi semua beban kamu:((</span>
+                </p>
+
+                <p class="letter-paragraph">
+                    Selama kita bersama, kamu telah mengajarkan aku arti cinta yang sesungguhnya. Kesabaran, pengertian, 
+                    kesetiaan, dan kasih sayang yang tak pernah putus. Sejak bersama mu, aku mulai mengerti apa arti kehidupan sayangg. 
+                    Sejak kehadiran kamuu, aku tauu akuu harus perbaiki diri aku buat jadi lebih baik dan punya semangat hidup.
+                    Karna melihat mu yang begitu banyak sakit dan masalah atau kesulitan yang kamu rasakan, aku jadi berfikir,
+                    kalau aku terus menerus begini, kasihan cewek aku ini nanti dapat cwokkk kayak aku:((. 
+                    <span class="letter-highlight">Jadi aku benar - benar mau berusaha buat mengubah hidup aku dan mengatur emosi aku lebih baik lagi.</span>
+                </p>
+
+                <p class="letter-paragraph">
+                    Aku tidak meminta kamu untuk langsung memaafkan aku. Aku tau luka yang aku buat tidak akan 
+                    sembuh dalam semalam. Tapi aku mohon, beri aku kesempatan untuk membuktikan bahwa aku bisa berubah, 
+                    bahwa aku bisa menjadi orang yang kamu layak dapatkan. Beri aku kesempatan untuk 
+                    membuat kamu bahagia seperti seharusnya</span>.
+                </p>
+
+                <p class="letter-paragraph" style="text-align: center; font-size: 1.6rem; margin-top: 50px; color: var(--primary);">
+                    <strong>Aku sayangg bangett samaa kamuu:((.<br>
+                    Kemarin, hari ini, besok, dan selamanya. 💕</strong>
+                </p>
+
+                <p class="letter-signature">
+                    Aku tidak akan pernah mengurangi, berhenti atau pun sampai cape untuk selalu ada buat kamu:((,<br>
+                    Orang yang mencintaimu lebih dari apapun 💖
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PHOTO GALLERY SECTION ==================== -->
+    <section id="gallery">
+        <div class="container">
+            <h2 class="section-title">Kenangan Indah Kita</h2>
+            
+            <div class="gallery-grid">
+                <!-- 
+                ========================================
+                📸 CARA MENAMBAHKAN FOTO ASLI:
+                ========================================
+                
+                1. Buat folder "photos" di folder yang sama dengan file HTML ini
+                2. Masukkan foto-foto kamu ke folder "photos"
+                3. Ganti bagian <div class="photo-placeholder">📸</div> dengan:
+                   <img src="photos/nama-file-foto.jpg" alt="Deskripsi foto">
+                
+                Contoh:
+                <div class="photo-frame">
+                    <img src="photos/foto-kita-1.jpg" alt="Foto pertama kita">
+                </div>
+                
+                Format foto yang didukung: .jpg, .jpeg, .png, .gif
+                ========================================
+                -->
+
+                <!-- Foto 1 -->
+                <div class="photo-card">
+                    <div class="photo-frame">
+                        <!-- GANTI BAGIAN INI dengan <img> untuk foto asli -->
+                        <img src="photos/Moment1.jpeg" alt="Foto pertama kita">
+                    </div>
+                    <div class="photo-caption">
+                        <h3 class="photo-title">Momen Pertama Kita</h3>
+                        <p class="photo-description">
+                            Aku masih ingat betul saat Foto pertama yang kita ambil bersama. Senyum canggung tapi penuh kebahagiaan. 
+                            Kamu ingat kan sayangg??.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Foto 2 -->
+                <div class="photo-card">
+                    <div class="photo-frame">
+                        <!-- GANTI BAGIAN INI dengan <img> untuk foto asli -->
+                        <img src="photos/date.jpeg" alt="Foto pertama kita">
+                        <!-- Contoh: <img src="photos/foto2.jpg" alt="Kencan pertama"> -->
+                    </div>
+                    <div class="photo-caption">
+                        <h3 class="photo-title">Kencan Pertama</h3>
+                        <p class="photo-description">
+                            Hari yang tak akan pernah aku lupakan. Tertawa bersama, berbagi cerita, 
+                            dan jatuh cinta semakin dalam padamu. Dimana kita masih jalan waktu itu ke pelabuhan dan disana lah kita deep talk sayangg
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- Foto 4 -->
+                <div class="photo-card">
+                    <div class="photo-frame">
+                        <!-- GANTI BAGIAN INI dengan <img> untuk foto asli -->
+                        <img src="photos/ultah.jpeg" alt="Foto pertama kita">
+                        <!-- Contoh: <img src="photos/foto4.jpg" alt="Ulang tahun"> -->
+                    </div>
+                    <div class="photo-caption">
+                        <h3 class="photo-title">Ulang Tahunku</h3>
+                        <p class="photo-description">
+                            Surprise birthday yang membuat menangis bahagia. Air mataku adalah 
+                            hadiah terindah yang pernah aku terima. Dan aku belum pernah di rayakan seperti itu:((
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- Foto 6 -->
+                <div class="photo-card">
+                    <div class="photo-frame">
+                        <!-- GANTI BAGIAN INI dengan <img> untuk foto asli -->
+                        <img src="photos/bunga.jpeg" alt="Foto pertama kita">
+                        <!-- Contoh: <img src="photos/foto6.jpg" alt="Bunga untukmu"> -->
+                    </div>
+                    <div class="photo-caption">
+                        <h3 class="photo-title">Bunga Untukmu</h3>
+                        <p class="photo-description">
+                            Senyummu saat menerima bunga adalah hal terindah yang pernah aku lihat. 
+                            Aku ingin terus membuatmu tersenyum seperti itu.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TIMELINE SECTION ==================== -->
+    <section id="timeline">
+        <div class="container">
+            <h2 class="section-title">Perjalanan Cinta Kita</h2>
+            
+            <div class="timeline-wrapper">
+                <div class="timeline-item">
+                    <div class="timeline-icon">✨</div>
+                    <div class="timeline-date">Hari Pertama</div>
+                    <h3 class="timeline-title">Saat Pertama aku mulai berani mendekati mu</h3>
+                    <p class="timeline-text">
+                        Aku masih ingat dengan jelas saat kita makrab, aku sangat senang karna mu disana. Kita bergandengan tangan sambil jahil satu sama lain hahaha.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">💕</div>
+                    <div class="timeline-date">Kencan Pertama</div>
+                    <h3 class="timeline-title">Jatuh Cinta</h3>
+                    <p class="timeline-text">
+                        Kencan pertama yang sederhana hahaha. Tapi berhasil membuat mu senang sekali walau hanya bisa jalan kaki dan makan makanan sederhana bersama mu di pinggir danau haha.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">💑</div>
+                    <div class="timeline-date">Hari Jadian</div>
+                    <h3 class="timeline-title">Kamu Bilang "Iya"</h3>
+                    <p class="timeline-text">
+                        Hari paling bahagia dalam hidupku. Saat kamu menerima cintaku walaupun aku harus bujuk dan yakin kan kamu kalau aku benar - benar serius sama kamu haha. 
+                        Dan sekarang aku akan membuktikan nya sekali lagi bahwa aku benar - benar hanya mau kamu. Tolong jangan sama laki - laki lain yahh? :(. Aku tau aku gak pantas bilang ini.
+                        Tapi kasih aku kesempatan paling terakhir yaaa, aku bakal buktiin kalau aku bakalan membuat kamu bahagia terus dan tidak banyak beban. Aku tidakk akan membiarkan muu mendapatkkan laki - laki yang gabisa berjuang demi kamu:((
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">🌈</div>
+                    <div class="timeline-date">Momen Indah</div>
+                    <h3 class="timeline-title">Kenangan Bersama</h3>
+                    <p class="timeline-text">
+                        Semua momen kecil yang kita lalui bersama. Tertawa, menangis, bercanda, 
+                        berbagi mimpi. Semuanya adalah harta karun yang aku simpan di hatiku. Aku tidak pernah cape sama semua sikap kamu:(
+                            Aku justru senang bisa belajar arti hidup setelah bersama mu:(( Sejak bersama kamu, aku mulai mengerti ternyata buat seseorang bahagia harus begini, gaboleh bentak - bentak biar gak lukain hati kamu:( Maafin aku yaa plss:((
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">💔</div>
+                    <div class="timeline-date">Hari Kelam</div>
+                    <h3 class="timeline-title">Kesalahanku</h3>
+                    <p class="timeline-text">
+                        Hari dimana aku membuat kesalahan besar. Melihatmu menangis adalah hal 
+                        terburuk yang pernah aku alami. Aku sangat menyesal. Dan aku bakal perbaiki kesalahan aku demi kamu:(
+                            Aku tidak bakalan pergi atau menyerah, aku tau aku sudah tidak ada harga diri lagi, tapi kalau aku cuma diam apalagi lari dari masalah ini dan biarkan kesalahan aku. 
+                            Aku lebih buruk dari pecundang yang gabisa pertanggung jawabkan kesalahan nya.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">🙏</div>
+                    <div class="timeline-date">Hari Ini</div>
+                    <h3 class="timeline-title">Permintaan Maafku</h3>
+                    <p class="timeline-text">
+                        Dengan segenap hati, aku memohon maaf dan meminta kesempatan untuk 
+                        memperbaiki semuanya. Karena kamu adalah segalanya bagiku. AKu beneran gabisa sayangg kalau kamuu gakk adaa:((
+                            Gak tenang rasa nya aku belajar terus sambil upgrade diri aku tapi liat kamu sedih dan banyak sulit nya bahkan sampai nangis karna aku:((, aku bakal perbaiki kesalahan aku dan buat kamu lagi bahagia lagi:((
+                                Aku mohon kasih aku yaa kesempatan terakhirr:((
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">💍</div>
+                    <div class="timeline-date">Masa Depan</div>
+                    <h3 class="timeline-title">Bersama Selamanya</h3>
+                    <p class="timeline-text">
+                        Aku bermimpi tentang masa depan kita. Tua bersama, tertawa mengingat 
+                        semua kenangan. Ini adalah impian yang ingin aku wujudkan bersamamu. Aku akann membangun mimpi2 kamu, aku bakalan selalu usahakan semua nya buat kamu.
+                        Aku bakalan berikan segala nya yang aku punya demi kamu yaa sayang, kamu gak perlu khawatir:((
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== LOVE GAME SECTION ==================== -->
+    <section id="love-game">
+        <div class="container">
+            <h2 class="section-title">Test Cinta Kita</h2>
+            
+            <div class="game-container">
+                <h3 class="game-title">Seberapa Besar Cintaku Padamu?</h3>
+                
+                <div class="love-heart-display">💖</div>
+                
+                <div class="love-meter-container">
+                    <div class="love-meter-fill" id="loveMeter">0%</div>
+                </div>
+                
+                <button class="calculate-button" onclick="calculateLove()">
+                    Hitung Cinta Kita! ❤️
+                </button>
+                
+                <div class="love-result" id="loveResult"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PROMISES SECTION ==================== -->
+    <section id="promises">
+        <div class="container">
+            <h2 class="section-title">Janji Suci Dariku</h2>
+            
+            <div class="promises-grid">
+                <div class="promise-card">
+                    <div class="promise-icon">💬</div>
+                    <h3 class="promise-title">Komunikasi Terbuka</h3>
+                    <p class="promise-text">
+                        Aku janji akan lebih terbuka dalam berkomunikasi. Tidak akan menyimpan 
+                        masalah sendirian dan selalu mendengarkan dengan hati.
+                    </p>
+                </div>
+
+                <div class="promise-card">
+                    <div class="promise-icon">👁️</div>
+                    <h3 class="promise-title">Perhatian Penuh</h3>
+                    <p class="promise-text">
+                        Aku akan lebih memperhatikan perasaan dan kebutuhanmu. Kamu adalah 
+                        prioritas utama, dan aku akan menunjukkannya setiap hari.
+                    </p>
+                </div>
+
+                <div class="promise-card">
+                    <div class="promise-icon">⏰</div>
+                    <h3 class="promise-title">Quality Time</h3>
+                    <p class="promise-text">
+                        Waktu bersama kita sangat berharga. Aku akan selalu hadir, baik 
+                        secara fisik maupun mental, di setiap momen kita.
+                    </p>
+                </div>
+
+                <div class="promise-card">
+                    <div class="promise-icon">🤝</div>
+                    <h3 class="promise-title">Membangun Kepercayaan</h3>
+                    <p class="promise-text">
+                        Aku akan membangun kembali kepercayaanmu dengan kejujuran dan 
+                        transparansi. Setiap tindakanku akan membuktikan komitmenku.
+                    </p>
+                </div>
+
+                <div class="promise-card">
+                    <div class="promise-icon">💖</div>
+                    <h3 class="promise-title">Cinta Tanpa Batas</h3>
+                    <p class="promise-text">
+                        Aku akan mencintaimu setiap hari dengan cara yang membuatmu merasa 
+                        istimewa. Bukan hanya kata-kata, tapi tindakan nyata.
+                    </p>
+                </div>
+
+                <div class="promise-card">
+                    <div class="promise-icon">🌱</div>
+                    <h3 class="promise-title">Tumbuh Bersama</h3>
+                    <p class="promise-text">
+                        Kita akan belajar dari setiap kesalahan dan tumbuh menjadi versi 
+                        terbaik dari diri kita. Bersama, kita akan lebih kuat.
+                    </p>
+                </div>
+
+                <div class="promise-card">
+                    <div class="promise-icon">🎯</div>
+                    <h3 class="promise-title">Mendukung Mimpimu</h3>
+                    <p class="promise-text">
+                        Aku akan selalu mendukung setiap mimpi dan aspirasimu. Kesuksesanmu 
+                        adalah kebahagiaanku, karena aku ingin melihatmu terbang tinggi.
+                    </p>
+                </div>
+
+                <div class="promise-card">
+                    <div class="promise-icon">🏡</div>
+                    <h3 class="promise-title">Rumah Untukmu</h3>
+                    <p class="promise-text">
+                        Aku akan menjadi rumah yang aman dan nyaman untukmu. Tempat dimana 
+                        kamu bisa menjadi diri sendiri tanpa takut.
+                    </p>
+                </div>
+
+                <div class="promise-card">
+                    <div class="promise-icon">😊</div>
+                    <h3 class="promise-title">Kebahagiaanmu</h3>
+                    <p class="promise-text">
+                        Tujuan hidupku adalah membuat kamu bahagia. Aku akan melakukan 
+                        apapun untuk melihat senyum indahmu setiap hari.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== REASONS CAROUSEL ==================== -->
+    <section id="reasons">
+        <div class="container">
+            <h2 class="section-title">Alasan Kenapa Aku Sangat Mencintaimu</h2>
+            
+            <div class="carousel-container">
+                <div class="reason-slide active">
+                    <div class="reason-number">01</div>
+                    <h3 class="reason-title">Senyum Manismu</h3>
+                    <p class="reason-description">
+                        Setiap kali kamu tersenyum, dunia seakan berhenti berputar. Senyummu 
+                        mampu mencerahkan hari tergelapku dan membuat semua masalah terasa ringan.
+                    </p>
+                </div>
+
+                <div class="reason-slide">
+                    <div class="reason-number">02</div>
+                    <h3 class="reason-title">Kesabaran Luar Biasa</h3>
+                    <p class="reason-description">
+                        Kamu selalu sabar menghadapi semua kekuranganku. Kamu menerimaku apa 
+                        adanya dengan sepenuh hati. Kesabaranmu mengajarkanku arti cinta sejati.
+                    </p>
+                </div>
+
+                <div class="reason-slide">
+                    <div class="reason-number">03</div>
+                    <h3 class="reason-title">Dukunganmu</h3>
+                    <p class="reason-description">
+                        Di setiap langkahku, kamu selalu ada. Mendukungku dalam mimpi-mimpiku, 
+                        menghibur saat aku terjatuh. Kamu adalah cheerleader terbaikku.
+                    </p>
+                </div>
+
+                <div class="reason-slide">
+                    <div class="reason-number">04</div>
+                    <h3 class="reason-title">Tawa Lepasmu</h3>
+                    <p class="reason-description">
+                        Suara tawamu adalah musik terindah. Ketika kamu tertawa lepas, hatiku 
+                        ikut berbunga-bunga. Aku ingin terus mendengar tawamu selamanya.
+                    </p>
+                </div>
+
+                <div class="reason-slide">
+                    <div class="reason-number">05</div>
+                    <h3 class="reason-title">Kebaikan Hatimu</h3>
+                    <p class="reason-description">
+                        Hatimu yang lembut dan penuh kasih membuat aku jatuh cinta setiap hari. 
+                        Cara kamu memperlakukan semua orang dengan baik menunjukkan jiwa indahmu.
+                    </p>
+                </div>
+
+                <div class="reason-slide">
+                    <div class="reason-number">06</div>
+                    <h3 class="reason-title">Kecerdasanmu</h3>
+                    <p class="reason-description">
+                        Setiap percakapan denganmu selalu menarik. Cara pandangmu, ide-idemu 
+                        yang brilian, semua membuatku semakin kagum dan jatuh cinta.
+                    </p>
+                </div>
+
+                <div class="reason-slide">
+                    <div class="reason-number">07</div>
+                    <h3 class="reason-title">Kamu Adalah Rumahku</h3>
+                    <p class="reason-description">
+                        Di pelukanmu, aku menemukan kedamaian. Di sisimu, aku merasa lengkap. 
+                        Kamu adalah rumah dimana aku selalu ingin pulang.
+                    </p>
+                </div>
+
+                <div class="reason-slide">
+                    <div class="reason-number">08</div>
+                    <h3 class="reason-title">Membuatku Lebih Baik</h3>
+                    <p class="reason-description">
+                        Bersamamu, aku menjadi versi terbaik dari diriku. Kamu menginspirasi aku 
+                        untuk terus berkembang dan bermimpi lebih besar.
+                    </p>
+                </div>
+
+                <div class="reason-slide">
+                    <div class="reason-number">09</div>
+                    <h3 class="reason-title">Keunikanmu</h3>
+                    <p class="reason-description">
+                        Dari caramu bicara, tertawa, bahkan saat marah. Setiap hal tentangmu 
+                        unik dan spesial. Tidak ada yang bisa menggantikan tempatmu.
+                    </p>
+                </div>
+
+                <div class="reason-slide">
+                    <div class="reason-number">10</div>
+                    <h3 class="reason-title">Karena Kamu Adalah Kamu</h3>
+                    <p class="reason-description">
+                        Aku mencintaimu bukan karena satu alasan. Aku mencintaimu karena segala 
+                        hal tentangmu. Setiap detailnya membuat kamu sempurna di mataku.
+                    </p>
+                </div>
+            </div>
+
+            <div class="carousel-controls">
+                <button class="carousel-btn" onclick="prevReason()">◀</button>
+                <button class="carousel-btn" onclick="nextReason()">▶</button>
+            </div>
+
+            <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+    </section>
+
+    <!-- ==================== FINAL MESSAGE ==================== -->
+    <section id="final">
+        <div class="container">
+            <h2 class="section-title">Pesan Terakhir</h2>
+            
+            <div class="final-content">
+                <p class="final-paragraph">
+                    Sayang, setelah semua yang telah aku tulis, satu hal yang pasti: 
+                    <strong>kamu adalah cinta sejatiku</strong>.
+                </p>
+
+                <p class="final-paragraph">
+                    Aku tahu kata maaf tidak akan pernah cukup untuk menghapus rasa sakit. 
+                    Tapi aku mohon dengan segenap hatiku, <strong>berikan aku satu kesempatan lagi</strong> 
+                    untuk membuktikan cinta yang tulus ini.
+                </p>
+
+                <p class="final-paragraph">
+                    Tanpamu, hidupku kehilangan makna. Tanpamu, senyumku tidak lagi tulus. 
+                    Tanpamu, aku kehilangan bagian terbaik dari diriku. 
+                    <strong>Kamu adalah segalanya bagiku</strong>.
+                </p>
+
+                <p class="final-paragraph" style="font-size: 2.2rem; margin-top: 60px;">
+                    <strong>Aku mencintaimu dengan sepenuh jiwa ragaku.<br>
+                    Sekarang dan selamanya. 💖✨</strong>
+                </p>
+
+                <button class="forgive-button-ultimate" onclick="forgiveMe()">
+                    <span style="position: relative; z-index: 2;">Iya, Aku Maafin Kamu ❤️</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MODAL ==================== -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="celebration-emoji">🎉💖✨🎊💕</div>
+            <h2>Terima Kasih Sayangku!</h2>
+            <p>
+                Kamu tidak akan menyesal kali ini, aku bakalan buktiin dan buat dunia cemburu liat hubungan kita
+            </p>
+            <p style="font-size: 2rem; color: var(--primary); margin-top: 30px;">
+                Aku sayang kamu lebih dari apapun! 💕
+            </p>
+            <p style="font-size: 6rem; margin-top: 40px;">
+                😊💑🌹💝✨
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // ==================== LOADER ====================
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 2000);
+        });
+
+        // ==================== CUSTOM CURSOR ====================
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Expand cursor on hover
+        document.querySelectorAll('a, button, .photo-card, .promise-card, .timeline-item').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+        });
+
+        // ==================== MUSIC PLAYER ====================
+        /* 
+        ========================================
+        🎵 BAGIAN MUSIK - GANTI DI SINI!
+        ========================================
+        
+        1. Buat folder "music" di folder yang sama dengan file HTML ini
+        2. Masukkan file MP3 kamu ke folder "music"
+        3. Ganti 'music/romantic-song.mp3' dengan nama file musik kamu
+        
+        Contoh: 
+        - File musik: my-love-song.mp3
+        - Ganti jadi: 'music/my-love-song.mp3'
+        
+        Tips:
+        - Gunakan nama file tanpa spasi (pakai - atau _)
+        - Ukuran file maksimal 10MB untuk loading cepat
+        ========================================
+        */
+        
+        const audio = new Audio('musik/hasian.mp3'); // ← GANTI NAMA FILE MUSIK DI SINI
+        audio.loop = true; // Musik akan berulang terus
+        audio.volume = 0.5; // Volume 50% (0.0 - 1.0)
+        
+        let isPlaying = false;
+        const musicPlayer = document.getElementById('musicPlayer');
+        const musicIcon = document.getElementById('musicIcon');
+        const volumeControl = document.getElementById('volumeControl');
+        const volumeSlider = document.getElementById('volumeSlider');
+
+        // Play/Pause musik
+        musicPlayer.onclick = () => {
+            if (isPlaying) {
+                audio.pause();
+                musicIcon.classList.add('paused');
+            } else {
+                audio.play();
+                musicIcon.classList.remove('paused');
+            }
+            isPlaying = !isPlaying;
+        };
+
+        // Volume control
+        volumeSlider.oninput = (e) => {
+            audio.volume = e.target.value / 100;
+        };
+
+        // Show/hide volume control on right click
+        musicPlayer.oncontextmenu = (e) => {
+            e.preventDefault();
+            volumeControl.classList.toggle('show');
+        };
+
+        // ==================== CANVAS PARTICLE SYSTEM ====================
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 4 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.opacity = Math.random() * 0.5 + 0.3;
+                this.color = ['255, 107, 157', '255, 160, 122', '255, 215, 0'][Math.floor(Math.random() * 3)];
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width || this.x < 0 || this.y > canvas.height || this.y < 0) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        const particles = [];
+        for (let i = 0; i < 120; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // ==================== HERO 3D PARALLAX ====================
+        const hero3D = document.querySelector('.hero-3d');
+
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth > 768) {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 30;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 30;
+                
+                if (hero3D) {
+                    hero3D.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+                }
+            }
+        });
+
+        // ==================== INTERACTIVE HEART ====================
+        function clickHeart() {
+            const heart = document.querySelector('.heart-3d');
+            heart.classList.add('clicked');
+            
+            setTimeout(() => {
+                heart.classList.remove('clicked');
+            }, 500);
+
+            // Create heart explosion
+            const symbols = ['💖', '💕', '💗', '💝', '💘', '❤️', '✨', '⭐', '🌟'];
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const symbol = document.createElement('div');
+                    symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                    symbol.style.position = 'fixed';
+                    symbol.style.left = '50%';
+                    symbol.style.top = '50%';
+                    symbol.style.fontSize = '3rem';
+                    symbol.style.zIndex = '10000';
+                    symbol.style.pointerEvents = 'none';
+                    
+                    const angle = (Math.PI * 2 * i) / 30;
+                    const velocity = 8 + Math.random() * 5;
+                    
+                    document.body.appendChild(symbol);
+                    
+                    let x = 0, y = 0, opacity = 1;
+                    const animate = () => {
+                        x += Math.cos(angle) * velocity;
+                        y += Math.sin(angle) * velocity;
+                        opacity -= 0.02;
+                        
+                        symbol.style.transform = `translate(${x}px, ${y}px)`;
+                        symbol.style.opacity = opacity;
+                        
+                        if (opacity > 0) {
+                            requestAnimationFrame(animate);
+                        } else {
+                            symbol.remove();
+                        }
+                    };
+                    
+                    animate();
+                }, i * 30);
+            }
+        }
+
+        // ==================== LOVE CALCULATOR ====================
+        function calculateLove() {
+            const meter = document.getElementById('loveMeter');
+            const result = document.getElementById('loveResult');
+            
+            let percentage = 0;
+            const interval = setInterval(() => {
+                percentage += 2;
+                meter.style.width = percentage + '%';
+                meter.textContent = percentage + '%';
+                
+                if (percentage >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        result.innerHTML = '<strong style="font-size: 1.8rem; color: var(--primary);">💯 CINTA SEJATI!</strong><br><br>Cintaku padamu tidak terbatas! Infinity dan jauh lebih dari itu! 💕✨';
+                        createMassiveHeartExplosion();
+                    }, 500);
+                }
+            }, 20);
+        }
+
+        function createMassiveHeartExplosion() {
+            const symbols = ['💖', '💕', '💗', '💝', '💘', '❤️', '✨', '⭐'];
+            
+            for (let i = 0; i < 80; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                    heart.style.position = 'fixed';
+                    heart.style.left = '50%';
+                    heart.style.top = '50%';
+                    heart.style.fontSize = (Math.random() * 2 + 1.5) + 'rem';
+                    heart.style.zIndex = '99999';
+                    heart.style.pointerEvents = 'none';
+                    
+                    const angle = (Math.PI * 2 * i) / 80;
+                    const velocity = 6 + Math.random() * 6;
+                    
+                    document.body.appendChild(heart);
+                    
+                    let x = 0, y = 0, rotation = 0, opacity = 1;
+                    const animate = () => {
+                        x += Math.cos(angle) * velocity;
+                        y += Math.sin(angle) * velocity;
+                        rotation += 10;
+                        opacity -= 0.015;
+                        
+                        heart.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
+                        heart.style.opacity = opacity;
+                        
+                        if (opacity > 0) {
+                            requestAnimationFrame(animate);
+                        } else {
+                            heart.remove();
+                        }
+                    };
+                    
+                    animate();
+                }, i * 15);
+            }
+        }
+
+        // ==================== REASONS CAROUSEL ====================
+        let currentReason = 0;
+        const reasonSlides = document.querySelectorAll('.reason-slide');
+        const totalReasons = reasonSlides.length;
+
+        function showReason(index) {
+            reasonSlides.forEach(slide => slide.classList.remove('active'));
+            reasonSlides[index].classList.add('active');
+            
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextReason() {
+            currentReason = (currentReason + 1) % totalReasons;
+            showReason(currentReason);
+        }
+
+        function prevReason() {
+            currentReason = (currentReason - 1 + totalReasons) % totalReasons;
+            showReason(currentReason);
+        }
+
+        // Create carousel dots
+        const dotsContainer = document.getElementById('carouselDots');
+        for (let i = 0; i < totalReasons; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            if (i === 0) dot.classList.add('active');
+            dot.onclick = () => {
+                currentReason = i;
+                showReason(currentReason);
+            };
+            dotsContainer.appendChild(dot);
+        }
+
+        // Auto-play carousel
+        setInterval(nextReason, 6000);
+
+        // ==================== FORGIVE BUTTON ====================
+        function forgiveMe() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'flex';
+            
+            // Create epic confetti
+            createEpicConfetti();
+            
+            modal.onclick = () => {
+                modal.style.display = 'none';
+            };
+        }
+
+        function createEpicConfetti() {
+            const symbols = ['🎊', '🎉', '⭐', '✨', '💫', '🌟', '💖', '💝', '🎀', '🌈', '💕', '💗', '💘', '🎁'];
+            
+            for (let i = 0; i < 200; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-50px';
+                    confetti.style.fontSize = (Math.random() * 2.5 + 1) + 'rem';
+                    confetti.style.zIndex = '999999';
+                    confetti.style.pointerEvents = 'none';
+                    
+                    const speedY = Math.random() * 3 + 4;
+                    const speedX = (Math.random() - 0.5) * 4;
+                    const rotation = Math.random() * 360;
+                    const rotationSpeed = (Math.random() - 0.5) * 20;
+                    
+                    let y = -50;
+                    let x = parseFloat(confetti.style.left);
+                    let currentRotation = rotation;
+                    
+                    const animate = () => {
+                        y += speedY;
+                        x += speedX;
+                        currentRotation += rotationSpeed;
+                        
+                        confetti.style.top = y + 'px';
+                        confetti.style.left = x + '%';
+                        confetti.style.transform = `rotate(${currentRotation}deg)`;
+                        
+                        if (y < window.innerHeight + 100) {
+                            requestAnimationFrame(animate);
+                        } else {
+                            confetti.remove();
+                        }
+                    };
+                    
+                    document.body.appendChild(confetti);
+                    animate();
+                }, i * 15);
+            }
+        }
+
+        // ==================== SMOOTH SCROLL ====================
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // ==================== SCROLL REVEAL ANIMATIONS ====================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.letter-paper, .photo-card, .timeline-item, .promise-card, .game-container').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
